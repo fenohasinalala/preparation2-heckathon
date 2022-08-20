@@ -1,0 +1,851 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is the API to get access the application to manage cocktails and drinks in bar.
+  version: "1.0.0"
+  title: Cocktails management for bar
+  
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0
+  - url: 'https://petstore.swagger.io/v2'
+tags:
+  - name: Categories
+    description: Information about Categories
+    
+  - name: Drinks
+    description: Everything about Drinks
+  - name: Cocktails
+    description: Specification about Cocktails
+paths:    
+  /categories:
+      get:
+        tags:
+          - "Categories"
+        summary: Get all Categories
+        operationId: getCategories
+        parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+        - name: name
+          description: Filter Categories by name, case is ignored
+          in: query
+          schema:
+            type: string
+        
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/Category'
+          400:
+            description: Error
+            content: {}
+      post:
+        tags:
+          - "Categories"
+        summary: Add new Category
+        operationId: postCategory
+        requestBody:
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewCategory'
+        responses:
+          200:
+            description: Category added successfully
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/Category'
+          400:
+              description: Error
+              content: {}
+       
+  /categories/{id}:
+    get:
+      tags:
+        - "Categories"
+      summary: Get a category by specified id
+      operationId: getCategory
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        400:
+            description: Error
+            content: {}
+    patch:
+      tags:
+      - "Categories"
+      summary: Change some details of Category given by ID
+      description: "Possible changes on : name"
+      operationId: patchCategory
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategory'
+            examples:
+              changeName:
+                summary: Change name
+                value:
+                  name : 'New name'         
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewCategory'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+        - "Categories"
+      summary: Modify all information about Category given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: new Category
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCategory'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        400:
+          description: Error
+          content: {}
+    delete:
+      tags:
+        - "Categories"
+      summary: Delete a Category given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Category deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+        400:
+          description: Error
+          content: {}
+
+  /drinks:
+      get:
+        tags:
+          - Drinks
+        summary: Get all Drinks
+        operationId: getDrinks
+        parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+        - name: name
+          description: Filter Drinks by name, case is ignored
+          in: query
+          schema:
+            type: string
+        - name: price_under
+          description: Filter Drinks by price under given value
+          in: query
+          schema:
+            type: number
+        - name: price_above
+          description: Filter Drinks by price above given value
+          in: query
+          schema:
+            type: number
+        
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/Drink'
+          400:
+            description: Error
+            content: {}
+      post:
+        tags:
+          - Drinks
+        summary: Add new Drinks
+        operationId: postDrinks
+        requestBody:
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewDrink'
+        responses:
+          200:
+            description: Drink added successfully
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/Drink'
+          400:
+              description: Error
+              content: {}
+       
+  /drinks/{id}:
+    get:
+      tags:
+        - Drinks
+      summary: Get a Drink by specified id
+      operationId: getDrink
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drink'
+        400:
+            description: Error
+            content: {}
+    patch:
+      tags:
+      - Drinks
+      summary: Change some details of Drink given by ID
+      description: "Possible changes on : name ; price"
+      operationId: patchDrink
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDrink'
+            examples:
+              changeName:
+                summary: Change name
+                value:
+                  name_drink : 'New name'
+              changePrice:
+                summary: Change price
+                value:
+                  price_drink : 4500          
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewDrink'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+        - Drinks
+      summary: Modify all information about Drink given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: new Drink
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewDrink'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drink'
+        400:
+          description: Error
+          content: {}
+    delete:
+      tags:
+        - Drinks
+      summary: Delete a Drink given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Drink deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drink'
+        400:
+          description: Error
+          content: {}
+  /categories/{id_category}/drinks:
+    get:
+      tags:
+        - Drinks
+      summary: Get a Drink by Category ID
+      operationId: getDrinkByCategory
+      parameters:
+        - name: id_category
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drink'
+        400:
+            description: Error
+            content: {}
+  /cocktails/{id_cocktail}/drinks:
+    get:
+      tags:
+        - Drinks
+      summary: Get a Drink by cocktails ID
+      operationId: getDrinkByCocktail
+      parameters:
+        - name: id_cocktail
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Drink'
+        400:
+            description: Error
+            content: {}
+
+  /cocktails:
+      get:
+        tags:
+          - Cocktails
+        summary: Get all Cocktails
+        operationId: getCocktails
+        parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+        - name: name
+          description: Filter Cocktails by name, case is ignored
+          in: query
+          schema:
+            type: string
+        - name: price_under
+          description: Filter Drinks by price under given value
+          in: query
+          schema:
+            type: number
+        - name: price_above
+          description: Filter Drinks by price above given value
+          in: query
+          schema:
+            type: number
+        
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/Cocktail'
+          400:
+            description: Error
+            content: {}
+      post:
+        tags:
+          - "Cocktails"
+        summary: Add new Cocktails
+        operationId: postCocktails
+        requestBody:
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewCocktail'
+        responses:
+          200:
+            description: Cocktails added successfully
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/Cocktail'
+          400:
+              description: Error
+              content: {}
+       
+  /cocktails/{id}:
+    get:
+      tags:
+        - "Cocktails"
+      summary: Get a Cocktail by specified id
+      operationId: getCocktail
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        400:
+            description: Error
+            content: {}
+    patch:
+      tags:
+      - "Cocktails"
+      summary: Change some details of Cocktail given by ID
+      description: "Possible changes on : name"
+      operationId: patchCocktail
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCocktail'
+            examples:
+              changeName:
+                summary: Change name
+                value:
+                  name : 'New name'         
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewCocktail'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+        - "Cocktails"
+      summary: Modify all information about Cocktail given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: new Cocktail
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCocktail'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        400:
+          description: Error
+          content: {}
+    delete:
+      tags:
+        - "Cocktails"
+      summary: Delete a Cocktail given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Cocktail deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        400:
+          description: Error
+          content: {}
+  /drinks/{id_drink}/cocktails:
+    get:
+      tags:
+        - "Cocktails"
+      summary: Get a Cocktail by drink ID
+      operationId: getCocktailByDrink
+      parameters:
+        - name: id_drink
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cocktail'
+        400:
+            description: Error
+            content: {}
+  
+  /users:
+      get:
+        tags:
+          - Users
+        summary: Get all Users
+        operationId: getUsers
+        parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+        - name: first_name
+          description: Filter Users by first name, case is ignored
+          in: query
+          schema:
+            type: string
+        - name: last_name
+          description: Filter Users by last name, case is ignored
+          in: query
+          schema:
+            type: string
+        - name: role
+          description: Filter Users by role, case is ignored
+          in: query
+          schema:
+            type: string
+        
+        responses:
+          200:
+            description: Success
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/User'
+          400:
+            description: Error
+            content: {}
+      post:
+        tags:
+          - Users
+        summary: Add new User
+        operationId: postUser
+        requestBody:
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewUser'
+        responses:
+          200:
+            description: User added successfully
+            content:
+              application/json:
+                schema:
+                    $ref: '#/components/schemas/User'
+          400:
+              description: Error
+              content: {}
+       
+  /users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get a User by specified id
+      operationId: getUser
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+            description: Error
+            content: {}
+    patch:
+      tags:
+      - Users
+      summary: Change some details of User given by ID
+      description: "Possible changes on : first name, last name, username, password or role"
+      operationId: patchUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+            examples:
+              changeFirstName:
+                summary: Change first name
+                value:
+                  first_name : 'New first name'
+              changeLastName:
+                summary: Change last name
+                value:
+                  last_name : 'New last name' 
+              changeUsername:
+                summary: Change username
+                value:
+                  username : 'New username'
+              changePassword:
+                summary: Change Password
+                value:
+                  password : 'New password'  
+              changeRole:
+                summary: Change role
+                value:
+                  role : 'New role'           
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/NewUser'
+        400:
+          description: Bad request
+          content: {}
+    put:
+      tags:
+        - Users
+      summary: Modify all information about User given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        description: new Users
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewUser'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Error
+          content: {}
+    delete:
+      tags:
+        - Users
+      summary: Delete a User given by ID
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Error
+          content: {}
+    
+    
+components:
+  schemas:
+    NewCategory:
+      type: object
+      properties:
+        name_category:
+          type: string
+          example: 'Alcoolisé'
+    Category:
+      type: object
+      properties:        
+        id_category:
+          type: number
+          example: 1
+      allOf:
+        - $ref: '#/components/schemas/NewCategory'
+    
+    NewDrink:
+      type: object
+      properties:
+        name_drink:
+          type: string
+          example: "jus d'orange"
+        price_drink:
+          type: number
+          example: 3000
+    Drink:
+      type: object
+      properties:        
+        id_drink:
+          type: number
+          example: 1
+      allOf:
+        - $ref: '#/components/schemas/NewDrink'
+    
+    NewCocktail:
+      type: object
+      properties:
+        name_cocktail:
+          type: string
+          example: 'Tequila Sunrise'
+        composition:
+          type: array
+          items:
+            type: number
+            example: [1,3,4]
+    Cocktail:
+      type: object
+      properties:        
+        id_cocktail:
+          type: number
+          example: 1
+        name_cocktail:
+          type: string
+          example: 'Tequila Sunrise'
+        price_cocktail:
+          type: number
+          example: 23000
+        number_composition:
+          type: number
+          example: 2
+    
+    NewUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: 'Rindra'
+        last_name:
+          type: string
+          example: 'RAKOTO'
+        username:
+          type: string
+          example: 'rindra01'
+        password:
+          type: string
+          example: 'rindrapass'
+        role:
+          type: string
+          example: 'manager'
+    User:
+      type: object
+      properties:        
+        id_user:
+          type: number
+          example: 1
+      allOf:
+        - $ref: '#/components/schemas/NewUser'
+    
