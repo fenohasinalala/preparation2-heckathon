@@ -7,11 +7,12 @@ import { categoryDrink, cocktail, cocktailDrink, drink } from '../interface';
 import coctailList from './coctailList';
 import "./style.css";
 
-function CompositionCoctail() {
+function CompositionCoctail(dataDrink:drink[]) {
 
 
-  const [dataDrink,setDataDrink] = useState<drink[]>([newDrink]);
-  const [loagDrink,setLoagDrink] = useState<number>(0);
+
+
+  
   const [newNameCocktail, setNewNameCocktail]= useState<string>('');
   const [priceDrink, setPriceDrink]= useState<number>(0);
   const [newCompose, setNewCompose]= useState<cocktailDrink[]>([{
@@ -20,18 +21,7 @@ function CompositionCoctail() {
   }]);
 
 
-  useEffect(() => {
-      axios({
-        url: "https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/drinks"
-      })
-        .then(response => {
-          setDataDrink(response.data);
-        })
-        .catch(error => {
-          console.log("error in GET DRINKS :");
-          console.log(error);
-        });
-    }, [loagDrink]);
+
 
     const AddCompose = ()=>{
       let newValu = newCompose;

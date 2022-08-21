@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { createPropertyAssignment } from "typescript";
-import { cocktail, drink, oneItemtObject } from "../interface";
+import { categoryDrink, cocktail, drink, oneItemtObject } from "../interface";
 
 export const items: oneItemtObject[]=[
     {
@@ -184,3 +184,10 @@ export const newDrink:drink={
     ],
     numberCompose: 1
   }
+
+  export const newCategory:categoryDrink={
+    "idCategory": 0,
+    "nameCategory": "string"
+  }
+
+  

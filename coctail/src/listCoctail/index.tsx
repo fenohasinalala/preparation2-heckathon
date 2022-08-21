@@ -5,26 +5,9 @@ import { newCoctail } from '../donner';
 import { cocktail } from '../interface';
 import "./style.css";
 
-function ListCoctail() {
-
-  const [dataCocktail,setDataCocktail] = useState<cocktail[]>([newCoctail])
-  const [loagCoctail,setLoagCoctail] = useState<number>(0)
+function ListCoctail(dataCocktail:cocktail[]) {
 
 
-
-  useEffect(() => {
-      axios({
-        url: "https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/cocktails"
-      })
-        .then(response => {
-          setDataCocktail(response.data);
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.log("error in GET COCTAIL :");
-          console.log(error);
-        });
-    }, [loagCoctail]);
 
 
   const ff= dataCocktail;
