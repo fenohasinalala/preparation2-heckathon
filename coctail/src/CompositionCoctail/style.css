@@ -1,0 +1,27 @@
+.nameAndPriceCoctael{
+  justify-content: space-between !important;
+}
+
+.conteneuCompositon{
+  width: 90%;
+}
+
+.conteneuAllcompositon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.titleCoctail{
+  border-bottom: 1px rgb(33, 33, 33) solid;
+}
+
+.addOrSupr{
+  margin-left: 3em;
+}
+
+.saveBoutton{
+  margin-right: 16%;
+}

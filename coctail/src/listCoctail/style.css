@@ -1,0 +1,36 @@
+.nameAndPriceCoctael{
+  justify-content: space-between !important;
+}
+
+.point{
+  flex: auto;
+  height: 50%;
+  color: transparent;
+  font-size:smaller;
+  border-bottom:dotted black 2px ;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.separateur{
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.conteneuCoctail{
+  width: 90%;
+}
+
+.conteneuAllCoctail{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleCoctail{
+  border-bottom: 1px rgb(33, 33, 33) solid;
+}
+
+.notBotList{
+  border-bottom: 1px rgb(33, 33, 33) solid;
+}
