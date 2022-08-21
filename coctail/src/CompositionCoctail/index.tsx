@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { newDrink } from '../donner';
 import { categoryDrink, cocktail, cocktailDrink, drink } from '../interface';
+import coctailList from './coctailList';
 import "./style.css";
 
 function CompositionCoctail() {
@@ -25,7 +26,6 @@ function CompositionCoctail() {
       })
         .then(response => {
           setDataDrink(response.data);
-          console.log(response.data);
         })
         .catch(error => {
           console.log("error in GET DRINKS :");
@@ -33,9 +33,39 @@ function CompositionCoctail() {
         });
     }, [loagDrink]);
 
+    const AddCompose = ()=>{
+      let newValu = newCompose;
+      newValu.push(
+          {
+            idDrink: dataDrink[0].idDrink,
+            nameDrink: dataDrink[0].nameDrink
+          }
+      )
+      console.log(newValu);
+      setNewNameCocktail(newNameCocktail.endsWith(" ")?newNameCocktail.slice(0, -1):newNameCocktail+" ");
+      setNewCompose(newValu)
+    }
 
+    const SuprComposeById = (key:number)=>{
 
-
+      if (newCompose.length!=1) {
+        if (newCompose.length-1==key) {
+          if (newCompose.length!=1) {
+            let newValu = newCompose;
+            newValu.splice(key-1, 2 , newValu[key-1])
+            console.log(newValu);
+            setNewNameCocktail(newNameCocktail.endsWith(" ")?newNameCocktail.slice(0, -1):newNameCocktail+" ");
+            setNewCompose(newValu)
+          }
+        }else{
+          let newValu = newCompose;
+          newValu.splice(key, 2 , newValu[key+1])
+          console.log(newValu);
+          setNewNameCocktail(newNameCocktail.endsWith(" ")?newNameCocktail.slice(0, -1):newNameCocktail+" ");
+          setNewCompose(newValu)
+        }
+      }
+    }
 
 
 
@@ -52,26 +82,12 @@ function CompositionCoctail() {
                 <Form.Control className="col-4" type="text" placeholder="Enter un coctail" value={newNameCocktail} onChange={
                   (e)=>{setNewNameCocktail(e.target.value)}
                 }/>
-                <Button className="col-4 addOrSupr" variant="primary" type="submit" onClick={()=>{setNewCompose(newCompose
-              )}} >
+                <Button className="col-4 addOrSupr" variant="primary" onClick={()=>{AddCompose()}} >
                     Ajouter composant
               </Button>
             </Form.Group>
 
-            {newCompose.map((donne,key)=>{return(
-                <Form.Group  className="row" controlId="exampleForm.ControlSelect1">
-                <Form.Label className="col-3">{"composant n°"+(key+1)}:</Form.Label>
-                <Form.Control className="col-4" as="select">
-                  {dataDrink.map((don,k)=>{return(
-                    <option onClick={()=>{newCompose[key]={idDrink:don.idDrink,nameDrink:don.nameDrink}}}>{don.nameDrink}</option>
-                  )})}
-                </Form.Control>
-                <Button className="col-4 addOrSupr" variant="primary" type="submit">
-                  Supprimer composant
-                </Button>
-              </Form.Group>
-            )
-            })}
+            {newCompose?coctailList(newCompose,dataDrink,SuprComposeById):<></>}
 
             <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
                 <Button className="col-4 saveBoutton" variant="primary" type="submit">

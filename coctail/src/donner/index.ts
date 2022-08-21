@@ -184,4 +184,3 @@ export const newDrink:drink={
     ],
     numberCompose: 1
   }
-
