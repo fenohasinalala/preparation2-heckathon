@@ -1,0 +1,14 @@
+name_drink,price_drink,id_category
+water,0,1
+gin,2000,1
+rum,3000,2
+tequila,4000,2
+vodka,4500,2
+simple syrup,2000,1
+lemon juice,3000,1
+cola,3500,1
+Applejack,4000,1
+grenadine,3500,1
+club soda,2000,1
+ginger ale,4000,1
+tomato juice,2500,1
