@@ -1,7 +1,14 @@
+import axios from 'axios';
 import { kMaxLength } from 'buffer';
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { functionFermetur } from '../donner';
 import { cocktailDrink, drink } from '../interface';
+
+
+
+
+
 
 const coctailList = (newCompose:cocktailDrink[],dataDrink:drink[],SuprComposeById:(key: number) => void) => {
     return (

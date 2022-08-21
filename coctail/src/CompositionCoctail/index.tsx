@@ -2,14 +2,26 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { newDrink } from '../donner';
+import { functionFermetur, newDrink } from '../donner';
 import { categoryDrink, cocktail, cocktailDrink, drink } from '../interface';
 import coctailList from './coctailList';
 import "./style.css";
 
 function CompositionCoctail(dataDrink:drink[]) {
-
-
+  const cocktailsPost = (values:{nameCocktail:string,compose:cocktailDrink[]}) => {
+    console.log(values);
+    try {
+        axios.post('https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/cocktails',
+        {
+            nameCocktail:values.nameCocktail,                    
+            compose:values.compose,
+            }
+        );
+        functionFermetur();
+    } catch (error){
+        console.log(error);
+    }
+}
 
 
   
@@ -80,7 +92,7 @@ function CompositionCoctail(dataDrink:drink[]) {
             {newCompose?coctailList(newCompose,dataDrink,SuprComposeById):<></>}
 
             <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
-                <Button className="col-4 saveBoutton" variant="primary" type="submit">
+                <Button className="col-4 saveBoutton" variant="primary" onClick={()=>{cocktailsPost({nameCocktail:newNameCocktail,compose:newCompose})}}>
                     Enregistrer
                 </Button>
             </Form.Group>

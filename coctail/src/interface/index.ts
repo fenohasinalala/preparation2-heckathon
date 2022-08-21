@@ -37,9 +37,9 @@ export interface categoryDrink {
     "nameCategory": string
 };
 
-export interface EyesOpen {
-    Confidence:number;
-    Value:boolean;
+export interface compose {
+    idDrink:number;
+    nameDrink:boolean;
 };
 
 export interface Gender {
