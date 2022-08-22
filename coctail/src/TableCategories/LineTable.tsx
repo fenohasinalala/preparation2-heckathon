@@ -9,8 +9,9 @@ interface props{
     functionChangID: (id:number)=>any;
     functionFermetur: ()=>any;
     PutPostCategori: (id: number | null, fermetur: () => void, category: categoryDrink | undefined) => JSX.Element;
+    actualisationAllData: () => void;
   }
-
+  
 export const LigneList:React.FC<props> = (props) => {
     const[activPut,setActivPut]=useState<Boolean>(false)
     const idLine = props.idLine;
@@ -30,6 +31,7 @@ export const LigneList:React.FC<props> = (props) => {
                 nameCategory:values, 
             }
             );
+            props.actualisationAllData();
             functionFermetur();
         } catch (error){
             console.log(error);
@@ -41,6 +43,7 @@ export const LigneList:React.FC<props> = (props) => {
         try {
             axios.delete('http://localhost:8080/categories/'+id,
             );
+            props.actualisationAllData();
             functionFermetur();
         } catch (error){
             console.log(error);

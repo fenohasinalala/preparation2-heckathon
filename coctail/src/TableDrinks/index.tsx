@@ -182,6 +182,7 @@ export const ListTableDrinks: React.FC<props> = (props) => {
                     functionChangID={functionChangID}
                     functionFermetur={functionFermetur}
                     PutPostDrink={props.PutPostDrink}
+                    actualisationAllData={props.actualisationAllData}
                   />
                 );
             })}

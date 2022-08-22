@@ -34,6 +34,7 @@ const FormulaireCategory: React.FC<Props> = (Props) => {
         axios[Props.id==null?"post":"put"]("http://localhost:8080/categories"+(Props.id==null?"":"/"+Props.id), {
           nameCategory: values.nameCategory,
         });
+        Props.actualisationAllData();
       } catch (error) {
         console.log(error);
       }

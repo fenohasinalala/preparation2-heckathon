@@ -32,7 +32,7 @@ function App() {
   const actualisationAllData = ()=>{
     setLoagDrink(loagDrink+1);
     setLoagCoctail(loagCoctail+1);
-    setLoagCategories(loagDrink+1)
+    setLoagCategories(loagCategories+1)
   }
 
   const returnAllValur = ()=>{
@@ -69,7 +69,7 @@ function App() {
   const [loagDrink, setLoagDrink] = useState<number>(0);
   useEffect(() => {
     axios({
-      url: "https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/drinks",
+      url: "http://localhost:8080/drinks",
     })
       .then((response) => {
         setDataDrink(response.data);
@@ -84,7 +84,7 @@ function App() {
   const [loagCoctail, setLoagCoctail] = useState<number>(0);
   useEffect(() => {
     axios({
-      url: "https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/cocktails",
+      url: "http://localhost:8080/cocktails",
     })
       .then((response) => {
         setDataCocktail(response.data);
@@ -102,7 +102,7 @@ function App() {
   const [loagCategories, setLoagCategories] = useState<number>(0);
   useEffect(() => {
     axios({
-      url: "https://virtserver.swaggerhub.com/fenohasinalala/preparation_hackathon/1.0.0/categories",
+      url: "http://localhost:8080/categories",
     })
       .then((response) => {
         setDataCategories(response.data);
@@ -146,7 +146,7 @@ function App() {
                 <div className="onHead">{NavbarHeader()}</div>
               </header>
               <body>
-                <div className="oneContener">{ListCoctail(dataCocktail,setActivUpdat)}</div>
+                <div className="oneContener">{ListCoctail(dataCocktail,setActivUpdat,actualisationAllData)}</div>
                 <div className="oneContener">
                   {
                     activUpdat?<CompositionCoctail dataDrink={dataDrink} actualisationAllData={actualisationAllData} returnAllValur={returnAllValur} setActivUpdat={setActivUpdat} />:<></>

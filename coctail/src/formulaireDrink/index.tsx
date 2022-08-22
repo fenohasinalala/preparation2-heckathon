@@ -47,10 +47,11 @@ const FormulaireDrink: React.FC<Props> = (Props) => {
           nameDrink: values.nameDrink,
           priceDrink: values.prix,
           category: {
-            idCategory: values.categorie, // A VOIRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+            idCategory: 1, // A VOIRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
             nameCategory: values.categorie // A VOIRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
           }
         });
+        Props.actualisationAllData();
       } catch (error) {
         console.log(error);
       }

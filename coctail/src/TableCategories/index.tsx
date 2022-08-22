@@ -64,7 +64,7 @@ export const ListTableCategories: React.FC<props> = (props) => {
           </label>
         </div>
         <div className="dataTable-search">
-          <Button variant="primary" onClick={()=>{functionFermeturPost();props.setActivUpdat(true)}}>add</Button>
+          <Button variant="primary" onClick={()=>{functionFermeturPost();props.setActivUpdat(true);props.actualisationAllData()}}>add</Button>
         </div>
       </div>
       <div className="dataTable-container p-2 bd-highlight">
@@ -149,6 +149,7 @@ export const ListTableCategories: React.FC<props> = (props) => {
                     functionChangID={functionChangID}
                     functionFermetur={functionFermetur}
                     PutPostCategori={props.PutPostCategori}
+                    actualisationAllData={props.actualisationAllData}
                   />
                 );
             })}

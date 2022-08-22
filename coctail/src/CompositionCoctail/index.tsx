@@ -15,7 +15,7 @@ interface Props {
 
 
 
-export const CompositionCoctail:React.FC<Props> = ({dataDrink,returnAllValur,setActivUpdat})=>{
+export const CompositionCoctail:React.FC<Props> = ({dataDrink,returnAllValur,setActivUpdat,actualisationAllData})=>{
   const cocktailsPost = (values:{nameCocktail:string,compose:cocktailDrink[]}) => {
     console.log(values);
     try {
@@ -25,6 +25,7 @@ export const CompositionCoctail:React.FC<Props> = ({dataDrink,returnAllValur,set
             compose:values.compose,
             }
         );
+        actualisationAllData();
         functionFermetur();
     } catch (error){
         console.log(error);

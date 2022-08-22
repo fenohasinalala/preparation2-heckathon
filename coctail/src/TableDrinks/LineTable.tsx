@@ -10,6 +10,7 @@ interface props{
     functionChangID: (id:number)=>any;
     functionFermetur: ()=>any;
     PutPostDrink:(id: number | null, fermetur: () => void, drink:drink | undefined) => JSX.Element;
+    actualisationAllData: () => void;
   }
 
 export const LigneList:React.FC<props> = (props) => {
@@ -29,6 +30,7 @@ export const LigneList:React.FC<props> = (props) => {
             axios.put('http://localhost:8080/drinks/'+id,
             values, 
             );
+            props.actualisationAllData();
             functionFermetur();
         } catch (error){
             console.log(error);
@@ -40,6 +42,7 @@ export const LigneList:React.FC<props> = (props) => {
         try {
             axios.delete('http://localhost:8080/drinks/'+id,
             );
+            props.actualisationAllData();
             functionFermetur();
         } catch (error){
             console.log(error);

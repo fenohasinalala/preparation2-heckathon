@@ -5,7 +5,7 @@ import { newCoctail } from '../donner';
 import { cocktail } from '../interface';
 import "./style.css";
 
-function ListCoctail(dataCocktail:cocktail[],setActivUpdat:React.Dispatch<React.SetStateAction<boolean>>) {
+function ListCoctail(dataCocktail:cocktail[],setActivUpdat:React.Dispatch<React.SetStateAction<boolean>>,actualisationAllData:()=>void) {
 
 
 
