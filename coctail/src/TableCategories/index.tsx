@@ -13,7 +13,11 @@ interface props {
   functionFermetur: () => void;
   functionFermeturPost: () => void;
   setItems:React.Dispatch<React.SetStateAction<categoryDrink[]>>;
-  setLoaling:React.Dispatch<React.SetStateAction<number>>
+  setLoaling:React.Dispatch<React.SetStateAction<number>>;
+  actualisationAllData:() => void;
+  returnAllValur:() => void;
+  setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
+  PutPostCategori: (id: number | null, fermetur: () => void, category: categoryDrink | undefined) => JSX.Element;
 }
 
 export const ListTableCategories: React.FC<props> = (props) => {
@@ -21,9 +25,6 @@ export const ListTableCategories: React.FC<props> = (props) => {
   const [page, setPage] = useState<number>(1);
   const [tri, setTri] = useState("");
   const [activTri, setActivTTri] = useState<boolean[]>([
-    false,
-    false,
-    false,
     false,
     false,
   ]);
@@ -62,80 +63,79 @@ export const ListTableCategories: React.FC<props> = (props) => {
             entries per page
           </label>
         </div>
+        <div className="dataTable-search">
+          <Button variant="primary" onClick={()=>{functionFermeturPost();props.setActivUpdat(true)}}>add</Button>
+        </div>
       </div>
       <div className="dataTable-container p-2 bd-highlight">
         <Table striped bordered hover className="tableBody">
           <thead>
             <tr>
-              <th
-                onClick={() => {
-                  setTri("comp1");
-                  setActivTTri([true, false, false, false, false]);
-                }}
-              >
-                id {Arrow(activTri[0])}
-              </th>
-              <th
-                onClick={() => {
-                  setTri("comp2");
-                  setActivTTri([false, true, false, false, false]);
-                }}
-              >
-                nom {Arrow(activTri[1])}
-              </th>
-              <th
-                onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
-                }}
-              >
-                modifier {Arrow(activTri[2])}
-              </th>
-              <th
-                onClick={() => {
-                  setTri("comp4");
-                  setActivTTri([false, false, false, true, false]);
-                }}
-              >
-                supprimer {Arrow(activTri[3])}
-              </th>
+                <th
+                  onClick={() => {
+                    setTri("idCategory");
+                    setActivTTri([true, false]);
+                  }}
+                >
+                  id {Arrow(activTri[0])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("nameCategory");
+                    setActivTTri([false, true]);
+                  }}
+                >
+                  nom {Arrow(activTri[1])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("comp3");
+                  }}
+                >
+                  modifier {Arrow(activTri[2])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("comp4");
+                  }}
+                >
+                  supprimer {Arrow(activTri[3])}
+                </th>
               
             </tr>
           </thead>
           <tfoot>
             <tr>
-            <th
-                onClick={() => {
-                  setTri("comp1");
-                  setActivTTri([true, false, false, false, false]);
-                }}
-              >
-                id {Arrow(activTri[0])}
-              </th>
               <th
-                onClick={() => {
-                  setTri("comp2");
-                  setActivTTri([false, true, false, false, false]);
-                }}
-              >
-                nom {Arrow(activTri[1])}
-              </th>
-              <th
-                onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
-                }}
-              >
-                modifier {Arrow(activTri[2])}
-              </th>
-              <th
-                onClick={() => {
-                  setTri("comp4");
-                  setActivTTri([false, false, false, true, false]);
-                }}
-              >
-                supprimer {Arrow(activTri[3])}
-              </th>
+                  onClick={() => {
+                    setTri("idCategory");
+                    setActivTTri([true, false]);
+                  }}
+                >
+                  id {Arrow(activTri[0])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("nameCategory");
+                    setActivTTri([false, true]);
+                  }}
+                >
+                  nom {Arrow(activTri[1])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("comp3");
+                  }}
+                >
+                  modifier {Arrow(activTri[2])}
+                </th>
+                <th
+                  onClick={() => {
+                    setTri("comp4");
+                  }}
+                >
+                  supprimer {Arrow(activTri[3])}
+                </th>
               
             </tr>
           </tfoot>
@@ -148,6 +148,7 @@ export const ListTableCategories: React.FC<props> = (props) => {
                     item={item}
                     functionChangID={functionChangID}
                     functionFermetur={functionFermetur}
+                    PutPostCategori={props.PutPostCategori}
                   />
                 );
             })}

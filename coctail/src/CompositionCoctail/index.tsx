@@ -7,7 +7,15 @@ import { categoryDrink, cocktail, cocktailDrink, drink } from '../interface';
 import coctailList from './coctailList';
 import "./style.css";
 
-function CompositionCoctail(dataDrink:drink[]) {
+interface Props {
+  dataDrink:drink[],actualisationAllData:() => void, 
+  returnAllValur:() => void, 
+  setActivUpdat:React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+
+
+export const CompositionCoctail:React.FC<Props> = ({dataDrink,returnAllValur,setActivUpdat})=>{
   const cocktailsPost = (values:{nameCocktail:string,compose:cocktailDrink[]}) => {
     console.log(values);
     try {
@@ -72,34 +80,51 @@ function CompositionCoctail(dataDrink:drink[]) {
 
 
   return (
-    <div className="conteneuAllcompositon">
-      <h2 className='titleCoctail'> COMPOSITION DE COCKTAIL</h2>
 
+    <>
+      <div className="fonds2" onClick={()=>(returnAllValur())}></div>
+      <div className="fonds">
       
 
-        <Form className="conteneuCompositon container">
+        <div className="conteneuAllcompositon">
 
-            <Form.Group className="row" controlId="formBasicText">
-                <Form.Label className="col-3">Nom du coctail:</Form.Label>
-                <Form.Control className="col-4" type="text" placeholder="Enter un coctail" value={newNameCocktail} onChange={
-                  (e)=>{setNewNameCocktail(e.target.value)}
-                }/>
-                <Button className="col-4 addOrSupr" variant="primary" onClick={()=>{AddCompose()}} >
-                    Ajouter composant
-              </Button>
-            </Form.Group>
 
-            {newCompose?coctailList(newCompose,dataDrink,SuprComposeById):<></>}
+        <div className="whitFond">
+          <h2 className='titleCoctail'> COMPOSITION DE COCKTAIL</h2>
+            <Form className="conteneuCompositon container">
 
-            <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
-                <Button className="col-4 saveBoutton" variant="primary" onClick={()=>{cocktailsPost({nameCocktail:newNameCocktail,compose:newCompose})}}>
-                    Enregistrer
-                </Button>
-            </Form.Group>
+                <Form.Group className="row" controlId="formBasicText">
+                    <Form.Label className="col-3">Nom du coctail:</Form.Label>
+                    <Form.Control className="col-4" type="text" placeholder="Enter un coctail" value={newNameCocktail} onChange={
+                      (e)=>{setNewNameCocktail(e.target.value)}
+                    }/>
+                    <Button className="col-4 addOrSupr" variant="primary" onClick={()=>{AddCompose();console.log(newCompose)}} >
+                        Ajouter composant
+                  </Button>
+                </Form.Group>
 
-        </Form>
-    </div>
+                {newCompose?coctailList(newCompose,dataDrink,SuprComposeById):<></>}
+
+                <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
+                    <Button className="col-4 saveBoutton" variant="primary" onClick={()=>{cocktailsPost({nameCocktail:newNameCocktail,compose:newCompose});returnAllValur()}}>
+                        Enregistrer
+                    </Button>
+                </Form.Group>
+
+            </Form>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </>
+
+
+
+
+ 
   );
 }
-
-export default CompositionCoctail;

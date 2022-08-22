@@ -32,8 +32,18 @@ export interface drink {
         "category": categoryDrink
 };
 
+export interface setDrink {
+    "nameDrink": string,
+    "priceDrink": number,
+    "category": categoryDrink
+};
+
 export interface categoryDrink {
     "idCategory": number,
+    "nameCategory": string
+};
+
+export interface sertCategoryDrink {
     "nameCategory": string
 };
 

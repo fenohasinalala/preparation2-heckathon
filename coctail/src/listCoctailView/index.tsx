@@ -5,7 +5,7 @@ import { newCoctail } from '../donner';
 import { cocktail } from '../interface';
 import "./style.css";
 
-function ListCoctail(dataCocktail:cocktail[]) {
+function ListCoctailVew(dataCocktail:cocktail[]) {
 
 
 
@@ -30,8 +30,6 @@ function ListCoctail(dataCocktail:cocktail[]) {
                   <div>
                     {""+donne.priceCocktail+" Ar"}
                   </div>
-                  <button className="btn btn-outline-danger separt">Suprimer</button>
-                  <button className="btn btn-outline-success separt">Modifier</button>
                 </div>
                 <div className="d-flex justify-content-start">
                   {
@@ -62,4 +60,4 @@ function ListCoctail(dataCocktail:cocktail[]) {
   );
 }
 
-export default ListCoctail;
+export default ListCoctailVew;

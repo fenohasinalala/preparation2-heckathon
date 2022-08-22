@@ -13,7 +13,11 @@ interface props {
   functionFermetur: () => void;
   functionFermeturPost: () => void;
   setItems:React.Dispatch<React.SetStateAction<drink[]>>;
-  setLoaling:React.Dispatch<React.SetStateAction<number>>
+  setLoaling:React.Dispatch<React.SetStateAction<number>>;
+  actualisationAllData:() => void;
+  returnAllValur:() => void;
+  setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
+  PutPostDrink:(id: number | null, fermetur: () => void, drink:drink | undefined) => JSX.Element;
 }
 
 export const ListTableDrinks: React.FC<props> = (props) => {
@@ -21,7 +25,6 @@ export const ListTableDrinks: React.FC<props> = (props) => {
   const [page, setPage] = useState<number>(1);
   const [tri, setTri] = useState("");
   const [activTri, setActivTTri] = useState<boolean[]>([
-    false,
     false,
     false,
     false,
@@ -62,6 +65,9 @@ export const ListTableDrinks: React.FC<props> = (props) => {
             entries per page
           </label>
         </div>
+        <div className="dataTable-search">
+          <Button variant="primary" onClick={()=>{functionFermeturPost();props.setActivUpdat(true)}}>add</Button>
+        </div>
       </div>
       <div className="dataTable-container p-2 bd-highlight">
         <Table striped bordered hover className="tableBody">
@@ -69,51 +75,49 @@ export const ListTableDrinks: React.FC<props> = (props) => {
             <tr>
               <th
                 onClick={() => {
-                  setTri("comp1");
-                  setActivTTri([true, false, false, false, false]);
+                  setTri("idDrink");
+                  setActivTTri([true, false, false, false]);
                 }}
               >
                 id {Arrow(activTri[0])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp2");
-                  setActivTTri([false, true, false, false, false]);
+                  setTri("nameDrink");
+                  setActivTTri([false, true, false, false]);
                 }}
               >
                 nom {Arrow(activTri[1])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
+                  setTri("priceDrink");
+                  setActivTTri([false, false, true, false]);
                 }}
               >
                 prix {Arrow(activTri[2])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
+                  setTri("category");
+                  setActivTTri([false, false, false, true]);
                 }}
               >
-                categorie {Arrow(activTri[2])}
+                categorie {Arrow(activTri[3])}
               </th>
               <th
                 onClick={() => {
                   setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
                 }}
               >
-                modifier {Arrow(activTri[2])}
+                modifier {Arrow(activTri[4])}
               </th>
               <th
                 onClick={() => {
                   setTri("comp4");
-                  setActivTTri([false, false, false, true, false]);
                 }}
               >
-                supprimer {Arrow(activTri[3])}
+                supprimer {Arrow(activTri[5])}
               </th>
               
             </tr>
@@ -122,53 +126,50 @@ export const ListTableDrinks: React.FC<props> = (props) => {
             <tr>
             <th
                 onClick={() => {
-                  setTri("comp1");
-                  setActivTTri([true, false, false, false, false]);
+                  setTri("idDrink");
+                  setActivTTri([true, false, false, false]);
                 }}
               >
                 id {Arrow(activTri[0])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp2");
-                  setActivTTri([false, true, false, false, false]);
+                  setTri("nameDrink");
+                  setActivTTri([false, true, false, false]);
                 }}
               >
                 nom {Arrow(activTri[1])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
+                  setTri("priceDrink");
+                  setActivTTri([false, false, true, false]);
                 }}
               >
                 prix {Arrow(activTri[2])}
               </th>
               <th
                 onClick={() => {
-                  setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
+                  setTri("category");
+                  setActivTTri([false, false, false, true]);
                 }}
               >
-                categorie {Arrow(activTri[2])}
+                categorie {Arrow(activTri[3])}
               </th>
               <th
                 onClick={() => {
                   setTri("comp3");
-                  setActivTTri([false, false, true, false, false]);
                 }}
               >
-                modifier {Arrow(activTri[2])}
+                modifier {Arrow(activTri[4])}
               </th>
               <th
                 onClick={() => {
                   setTri("comp4");
-                  setActivTTri([false, false, false, true, false]);
                 }}
               >
-                supprimer {Arrow(activTri[3])}
+                supprimer {Arrow(activTri[5])}
               </th>
-              
             </tr>
           </tfoot>
           <tbody>
@@ -180,6 +181,7 @@ export const ListTableDrinks: React.FC<props> = (props) => {
                     item={item}
                     functionChangID={functionChangID}
                     functionFermetur={functionFermetur}
+                    PutPostDrink={props.PutPostDrink}
                   />
                 );
             })}

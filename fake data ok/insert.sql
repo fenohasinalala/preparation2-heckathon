@@ -1,4 +1,4 @@
-begin transaction;
+
 
 /*  category( */
 INSERT INTO category(name_category) VALUES ('non alcoholic');
@@ -49,7 +49,3 @@ INSERT INTO compose(cocktail_id_cocktail,drink_id_drink) VALUES (5,5);
 INSERT INTO compose(cocktail_id_cocktail,drink_id_drink) VALUES (5,13);
 
 /* rollback transaction; annuler les modifications*/
-commit transaction; /*# appiquer les modifications*/
-
-select * from category;
-select * from drink;

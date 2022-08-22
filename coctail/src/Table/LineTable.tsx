@@ -17,6 +17,10 @@ export const LigneList:React.FC<props> = (props) => {
         functionChangID(item.id-1);
         functionFermetur()
     }
+
+
+
+    
     return (
         <>
             <tr id={""+item.id} key={item.name} onClick={functionParLing}>

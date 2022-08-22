@@ -2,8 +2,19 @@
   justify-content: space-between !important;
 }
 
-.conteneuCompositon{
+.whitFond{
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 2em;
+}
+
+.conteneuCompositon{
+  margin-top: 2em;
+  width: 95%;
 }
 
 .conteneuAllcompositon{
@@ -11,7 +22,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 100vw;
+  z-index: 110100;
+  margin-top: 20vh;
 }
 
 .titleCoctail{
@@ -24,4 +37,29 @@
 
 .saveBoutton{
   margin-right: 16%;
+}
+
+
+.fonds {
+  background-color: hsla(0, 0%, 0%, 0.6);
+  height: .1vh;
+  width: .1vw;
+  display: block;
+  position: fixed;
+  top: 0px;
+  left: 0x;
+  z-index: 1052;
+
+}
+
+.fonds2 {
+ background-color: hsla(0, 0%, 0%, 0.6);
+ height: 100vh;
+ width: 100vw;
+ display: block;
+ position: fixed;
+ top: 0px;
+ left: 0x;
+ z-index: 1051;
+
 }
