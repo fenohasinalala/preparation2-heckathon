@@ -5,7 +5,7 @@ import { newCoctail } from '../donner';
 import { cocktail } from '../interface';
 import "./style.css";
 
-function ListCoctail(dataCocktail:cocktail[]) {
+function ListCoctail(dataCocktail:cocktail[],setActivUpdat:React.Dispatch<React.SetStateAction<boolean>>) {
 
 
 
@@ -15,12 +15,15 @@ function ListCoctail(dataCocktail:cocktail[]) {
   return (
     <div className="conteneuAllCoctail">
       <h2 className='titleCoctail'> LIST DES COCKTAILS</h2>
+
+      <button  className="btn btn-secondary btn-lg" onClick={()=>{setActivUpdat(true)}}>Créer un nouveau cocktail</button>
+
       <ListGroup variant="flush" className='conteneuCoctail'>
         {dataCocktail==[]?<></>:
           (
             dataCocktail.map((donne)=>{return(
               <ListGroup.Item className='notBotList'>
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between grandre">
                   <div>
                     {donne.nameCocktail}
                   </div>

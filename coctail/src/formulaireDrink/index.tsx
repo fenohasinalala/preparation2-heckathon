@@ -2,7 +2,7 @@ import "./styles.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { drink } from "../interface";
+import { categoryDrink, cocktail, compose, drink } from "../interface";
 interface Props {
   drink: drink | undefined;
   actualisationAllData:() => void;
@@ -10,6 +10,7 @@ interface Props {
   setActivUpdat: React.Dispatch<React.SetStateAction<boolean>>;
   id:number | null;
   fermetur:()=>void;
+  dataCompose:categoryDrink[];
 }
 
 const FormulaireDrink: React.FC<Props> = (Props) => {
@@ -116,7 +117,15 @@ const FormulaireDrink: React.FC<Props> = (Props) => {
                 placeholder="categorie"
                 value={formik.values.categorie}
                 onChange={formik.handleChange}
-              />
+                >
+                  {Props.dataCompose.map((donne)=>{return(
+                      <option value="red" label={donne.nameCategory}>
+                      {" "}
+                      {donne.nameCategory}
+                    </option>
+                  )})}
+                </select>
+
               {formik.errors.categorie ? (
                 <p> {formik.errors.categorie} </p>
               ) : null}

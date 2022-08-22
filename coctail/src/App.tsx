@@ -22,6 +22,8 @@ import { Route, Routes } from "react-router-dom";
 import FormulaireDrink from "./formulaireDrink";
 import FormulaireCategory from "./formulaireCategory";
 import { CompositionCoctail } from "./CompositionCoctail";
+import NavbarHeaderVew from "./navBarHeaderVieu/NavbarHeaderVew";
+import ListCoctailVew from "./listCoctailView";
 
 function App() {
   const [activUpdat, setActivUpdat] = useState<boolean>(false);
@@ -46,6 +48,7 @@ function App() {
       setActivUpdat={setActivUpdat}
       id={id}
       fermetur={()=>{fermetur()}}
+      dataCompose={dataCategories}
       />)
   }
 
@@ -114,13 +117,27 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<div>
-          <header>
-                <div className="onHead">{NavbarHeader()}</div>
-              </header>
-          page d'accuiel
-
-        </div>} />
+      <Route path="/loging" 
+            element={
+              <div>
+                <body>
+                  {Loging()}
+                </body>
+              </div>
+            }
+        />
+        <Route path="/" 
+            element={
+              <div>
+                <header>
+                  <div className="onHead">{NavbarHeaderVew()}</div>
+                </header>
+                <body>
+                  <div className="oneContener">{ListCoctailVew(dataCocktail)}</div>
+                </body>
+              </div>
+            }
+        />
         <Route
           path="/bar/cocktails"
           element={
@@ -129,13 +146,13 @@ function App() {
                 <div className="onHead">{NavbarHeader()}</div>
               </header>
               <body>
-                <div className="oneContener">{ListCoctail(dataCocktail)}</div>
+                <div className="oneContener">{ListCoctail(dataCocktail,setActivUpdat)}</div>
                 <div className="oneContener">
                   {
                     activUpdat?<CompositionCoctail dataDrink={dataDrink} actualisationAllData={actualisationAllData} returnAllValur={returnAllValur} setActivUpdat={setActivUpdat} />:<></>
                   }
                 </div>
-                <button onClick={()=>{setActivUpdat(true)}}>dddddddddddddd</button>
+                
               </body>
             </div>
           }
@@ -169,6 +186,7 @@ function App() {
                   setActivUpdat={setActivUpdat}
                   id={idRequet}
                   fermetur={()=>{returnAllValur()}}
+                  dataCompose={dataCategories}
                   />:<></>}
                 </div>
               </body>

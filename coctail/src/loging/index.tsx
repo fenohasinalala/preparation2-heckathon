@@ -20,7 +20,7 @@ function Loging() {
 
 
             <Form.Group className="row justify-content-center" controlId="bouttonFunction1">
-                <Button className="col-6" variant="primary" type="submit">
+                <Button className="col-6" variant="primary" href="http://localhost:3000/bar/cocktails" type="submit">
                     CONNEXION
                 </Button>
             </Form.Group>
@@ -30,7 +30,7 @@ function Loging() {
             </Form.Group>
 
             <Form.Group className="row justify-content-center" controlId="bouttonFunction2">
-                <Button className="col-6" variant="primary" type="submit">
+                <Button className="col-6" variant="primary" href="http://localhost:3000/" type="submit">
                     VOIR LES COCKTAILS
                 </Button>
             </Form.Group>
